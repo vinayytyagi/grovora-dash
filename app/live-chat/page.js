@@ -1,9 +1,10 @@
 'use client'
+export const dynamic = 'force-dynamic'
 import { useEffect, useState } from "react";
 import ChatIdCard from "../components/ChatIdCard"
 import Sidebar from "../components/Sidebar"
 import { BiSearchAlt } from "react-icons/bi";
-import { FiArrowUp, FiUser, FiMenu } from "react-icons/fi";
+import { FiArrowUp, FiUser, FiMenu, FiPieChart, FiBarChart, FiFileText, FiBriefcase, FiTrendingUp, FiMessageCircle, FiSettings, FiCreditCard, FiCalendar } from "react-icons/fi";
 import { TfiEmail } from "react-icons/tfi";
 import { FaPhoneAlt } from "react-icons/fa";
 import { BsCalendarMonth } from "react-icons/bs";
@@ -12,6 +13,7 @@ import { MdOutlineEmojiEmotions } from "react-icons/md";
 import EmojiPicker from "./components/EmojiPicker";
 import { PiImageLight } from "react-icons/pi";
 import Image from "next/image";
+import AiChatSuggestion from "../components/AiChatSuggestion";
 
 
 //   Data
@@ -43,11 +45,12 @@ const Page = () => {
   const [messages, setMessages] = useState(messagesData);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
-  // Dummy User Account 
+  // Dummy User Account
   const agent = {
     id: 3,
     name: 'binod',
   }
+
 
   useEffect(() => {
     setMessages(messagesData);
@@ -122,7 +125,7 @@ const Page = () => {
     }
   }]
 
-  
+
 
   const getUserWithId = (id) => {
     return userData.find((user) => user.userId === id);
@@ -155,7 +158,7 @@ const Page = () => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar activeItem="Live Chat" isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
-
+      <AiChatSuggestion />
       <div className="flex-1 lg:ml-64">
         <div className="lg:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
           <button
@@ -245,7 +248,7 @@ const Page = () => {
                 className="p-2 rounded-lg text-gray-600 hover:bg-gray-100"
               >
                 <FiUser className="text-xl" />
-              </button> 
+              </button>
             </div>
             <div style={{ backgroundImage: "url('/assets/ChatBackground.svg')" }} className="messages flex flex-col gap-4 px-4 pt-8 scrollbar-hide pb-24 flex-1 overflow-y-auto">
               {
@@ -269,9 +272,9 @@ const Page = () => {
                           <p className="bg-white text-black rounded-lg rounded-tl-none px-4 py-2 max-w-[70%] break-words shadow-sm">
                             {message.user.message}
                           </p>
-                        </div> 
+                        </div>
                       }
-                      
+
                     </div>
                   )
                 })
@@ -296,7 +299,7 @@ const Page = () => {
                     <PiImageLight className="cursor-pointer text-2xl" />
                   </label>
                   <div className="relative">
-                      <MdOutlineEmojiEmotions 
+                      <MdOutlineEmojiEmotions
                       onClick={() => setShowEmojiPicker((s) => !s)}
                       aria-label="Open emoji picker" className="cursor-pointer text-2xl" />
                     {showEmojiPicker && (

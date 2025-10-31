@@ -4,11 +4,10 @@ import Sidebar from "../components/Sidebar"
 import { useState } from "react";
 import AiChatSuggestion from "../components/AiChatSuggestion";
 
-export default function DashboardLayout({ children }) {
+const Layout = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-
-    return (
-        <div className="flex min-h-screen bg-gray-50">
+  return (
+    <div className="flex min-h-screen bg-gray-50">
             <Sidebar activeItem="Dashboard" isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
             <AiChatSuggestion />
             <div className="flex-1 lg:ml-64">
@@ -60,5 +59,7 @@ export default function DashboardLayout({ children }) {
                 </div>
             </div>
         </div>
-    )
+  )
 }
+
+export default Layout

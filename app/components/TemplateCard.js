@@ -87,7 +87,7 @@ export default function TemplateCard({ template, isAISuggestion = false }) {
         className="relative rounded-lg px-2 py-4 shadow-sm border border-gray-200 hover:shadow-md transition-all duration-200 overflow-hidden"
         style={{color: getTextColor}}
       >
-        <Image fill className='absolute w-full h-full left-0 top-0 object-cover z-1' src={getBackgroundImage} />
+        <Image fill alt="background" className='absolute w-full h-full left-0 top-0 object-cover z-1' src={getBackgroundImage} />
         {/* top-left icon (absolute for consistency) */}
         <div className="absolute top-3 left-3 z-20">
           <div className="bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-sm">

@@ -16,14 +16,12 @@ import { HiOutlineViewList } from "react-icons/hi";
 import { LuSparkles } from "react-icons/lu";
 
 
-import Sidebar from '../components/Sidebar';
 import TemplateCard from '../components/TemplateCard';
 
 export default function TemplatesPage() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState('All Template');
   const [searchQuery, setSearchQuery] = useState('');
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const allTemplates = [
     {
@@ -199,24 +197,7 @@ export default function TemplatesPage() {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-
-      <Sidebar activeItem="Templates" isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
-
-      <div className="flex-1 lg:ml-64">
-        <div className="lg:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="p-2 rounded-lg text-gray-600 hover:bg-gray-100"
-          >
-            <FiMenu className="text-2xl" />
-          </button>
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-              <FiUser className="text-sm text-gray-600" />
-            </div>
-          </div>
-        </div>
-
+      
         <div className="p-4 sm:p-6">
           <div className="mb-6">
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-6">
@@ -300,7 +281,6 @@ export default function TemplatesPage() {
             <span>Scroll for more templates</span>
           </div>
         </div>
-      </div>
     </div>
   );
 }

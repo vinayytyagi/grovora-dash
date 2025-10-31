@@ -3,23 +3,22 @@ import {
   FiBarChart,
   FiFileText,
   FiBriefcase,
-  FiShoppingBag,
   FiTrendingUp,
   FiMessageCircle,
   FiSettings,
   FiCreditCard,
   FiZap,
-  FiMenu,
   FiX
 } from 'react-icons/fi';
+import { IoCalendarOutline } from "react-icons/io5";
 
 export default function Sidebar({ activeItem = 'Templates', isOpen, setIsOpen }) {
   const navigationItems = [
     { name: 'Dashboard', icon: FiPieChart, id: 'dashboard' },
     { name: 'Live Chat', icon: FiBarChart, id: 'live-chat' },
     { name: 'Templates', icon: FiFileText, id: 'templates' },
+    { name: 'Scheduler', icon: IoCalendarOutline, id: 'scheduler' },
     { name: 'Contact Us', icon: FiBriefcase, id: 'contact' },
-    { name: 'Template', icon: FiShoppingBag, id: 'templates-2' },
     { name: 'Campaigns', icon: FiTrendingUp, id: 'campaigns' },
     { name: 'Ads Manager', icon: FiMessageCircle, id: 'ads-manager' },
     { name: 'Flows', icon: FiSettings, id: 'flows' },

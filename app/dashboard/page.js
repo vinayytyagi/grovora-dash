@@ -89,7 +89,7 @@ const Page = () => {
                 <div className="w-full bg-white rounded-xl p-4 sm:p-6 shadow-sm">
                     <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <div>
-                            <h2 className="font-bold text-xl">Today's Sales</h2>
+                            <h2 className="font-bold text-xl">Today&apos;s Sales</h2>
                             <span className="text-gray-500 text-sm">Sales Summary</span>
                         </div>
                         <button className='w-full sm:w-auto flex gap-2 items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 text-gray-700 font-medium'>
