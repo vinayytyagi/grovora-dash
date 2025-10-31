@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <div className="flex min-h-screen bg-gray-50">
-            <Sidebar activeItem="Dashboard" isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
+            <Sidebar activeItem="Scheduler" isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
             <AiChatSuggestion />
             <div className="flex-1 lg:ml-64">
                 {/* Mobile Header */}
