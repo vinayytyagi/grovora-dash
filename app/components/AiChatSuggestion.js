@@ -5,7 +5,7 @@ import { SiCodemagic } from 'react-icons/si';
 const AiChatSuggestion = () => {
 
     const [querry,setQuerry] = useState('');
-    const [openChat,setOpenChat] = useState(true);
+    const [openChat,setOpenChat] = useState(false);
     const [micOn,setMicOn] = useState(false);
     const [manuallyOpened, setManuallyOpened] = useState(false);
     const timeoutRef = useRef(null);
@@ -59,7 +59,7 @@ const AiChatSuggestion = () => {
             setOpenChat(false)
             timeoutRef.current = null
           }
-        },2000)
+        },5000)
       } else {
         if(timeoutRef.current){
           clearTimeout(timeoutRef.current)
@@ -105,11 +105,11 @@ const AiChatSuggestion = () => {
               onClick={e => e.stopPropagation()} 
               className="w-12 h-12 p-3 rounded-full"
             >
-                <BsFillSendFill className="w-full h-full text-white active:translate-x-2 active:-translate-y-2  transition-all duration-300 ease-in-out" />
+                <BsFillSendFill className="w-full h-full cursor-pointer text-white active:translate-x-2 active:-translate-y-2  transition-all duration-300 ease-in-out" />
             </button>
           </> :
-          <div>
-            <span></span>
+          <div className='w-full h-full flex items-center justify-center cursor-pointer'>
+            <span className='absolute -top-6 left-0 text-sm'>Ask AI ✨</span>
             <SiCodemagic className="text-2xl text-white"/>
           </div>
         }
