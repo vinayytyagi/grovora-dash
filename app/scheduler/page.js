@@ -44,7 +44,7 @@ const Page = () => {
 
   return (
     <div className="flex flex-col min-h-screen w-full p-2 md:p-4 gap-4 bg-gray-50">
-      <div className="p-4 flex items-center h-auto md:h-16 w-full md:w-[80%] justify-between bg-white rounded-lg flex-wrap gap-4">
+      <div className="p-4 flex items-center h-auto md:h-16 w-full lg:w-[80%] justify-around bg-white rounded-lg flex-wrap gap-16 ">
         <span className="text-sm md:text-md font-medium px-4 py-3 border border-gray-300 rounded-full">Today</span>
         <div className="flex items-center gap-2">
           <span className="text-md font-medium w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full cursor-pointer">
@@ -55,7 +55,7 @@ const Page = () => {
             <FaAngleRight className="text-sm text-gray-600" />
           </span>
         </div>
-        <div className="w-full md:w-[20%] h-12 rounded-full overflow-hidden flex gap-1 items-center justify-center bg-gray-100 p-1">
+        <div className="w-full md:w-[25%] h-12 rounded-full overflow-hidden flex gap-1 items-center justify-center bg-gray-100 p-1">
           <span className='text-xs px-3 py-2 h-full font-medium w-full flex items-center justify-center text-gray-800/60 hover:text-gray-600 rounded-full cursor-pointer'>Year</span>
           <span className='text-xs px-3 py-2 h-full font-medium w-full flex items-center justify-center text-gray-800/60 hover:text-gray-600 rounded-full cursor-pointer bg-white text-gray-800'>Week</span>
           <span className='text-xs px-3 py-2 h-full font-medium w-full flex items-center justify-center text-gray-800/60 hover:text-gray-600 rounded-full cursor-pointer'>Month</span>
@@ -63,20 +63,20 @@ const Page = () => {
         </div>
       </div>
 
-      <div className='w-[100vw] bg-white rounded-lg p-0 max-h-[75vh] overflow-auto'>
-        <div className="grid min-w-[900px] md:min-w-[1120px]" style={{ gridTemplateColumns: `60px repeat(${days.length}, 1fr)` }}>
+      <div className='w-[100vw] bg-white rounded-lg p-0 max-h-[75vh] scrollbar-hide'>
+        <div className="grid min-w-[900px] md:min-w-[1120px] max-h-[5vh]" style={{ gridTemplateColumns: `60px repeat(${days.length}, 1fr)` }}>
           <div className="h-12 border-b border-gray-100 sticky top-0 z-20 bg-white" />
           {days.map((d) => (
             <div
               key={d.label}
-              className="h-12 border-b border-gray-100 px-2 md:px-4 flex items-center justify-center text-[10px] md:text-xs text-gray-600 sticky top-0 z-20 bg-white"
+              className="h-12 border-b border-gray-100 px-2 md:px-4 flex items-center sticky-top justify-center text-[10px] md:text-xs text-gray-600 sticky top-0 z-20 bg-white"
             >
               {d.label}
             </div>
           ))}
         </div>
 
-        <div className="relative">
+        <div className="relative overflow-auto max-h-[70vh] scrollbar-x-hide">
           <div
             className="grid min-w-[900px] md:min-w-[1120px]"
             style={{ gridTemplateColumns: `60px repeat(${days.length}, 1fr)` }}
@@ -103,12 +103,12 @@ const Page = () => {
                     return (
                       <div
                         key={i}
-                        className={`absolute left-0 right-0 rounded-md border text-[10px] p-1 md:p-2 shadow-sm ${e.color}`}
+                        className={`absolute left-0 right-0 rounded-md border text-[10px] p-1  shadow-sm ${e.color}`}
                         style={{ top: top + 2, height }}
                       >
-                        <div className="hidden md:flex items-center gap-2 text-gray-500 mb-1">
-                          <span className="px-1 py-[2px] rounded bg-white/70 border border-gray-200">{e.start}</span>
-                          <span className="px-1 py-[2px] rounded bg-white/70 border border-gray-200">{e.end}</span>
+                        <div className="hidden md:flex gap-1 text-gray-500 mb-1">
+                          <span className="px-1 rounded bg-white/70 border border-gray-200">{e.start}</span>-
+                          <span className="px-1 rounded bg-white/70 border border-gray-200">{e.end}</span>
                         </div>
                         <div className="text-[10px] md:text-[11px] leading-tight md:leading-4 text-gray-700 whitespace-pre-line">
                           {e.title}

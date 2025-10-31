@@ -101,8 +101,8 @@ export default function TemplateCard({ template, isAISuggestion = false }) {
         </div>
 
         {/* Title & subtitle */}
-        <div className="pl-14 pr-4 z-20 relative">
-          <h2 className="font-bold text-lg mb-1 truncate">{template.title}</h2>
+        <div className="pl-14 pr-4 z-20  relative">
+          <h2 className="font-bold text-lg mb-1">{template.title}</h2>
           <p className="text-sm mb-3">{template.subtitle}</p>
         </div>
 
@@ -138,7 +138,7 @@ export default function TemplateCard({ template, isAISuggestion = false }) {
       </div>
 
       {/* Template title */}
-      <h3 className="font-bold text-lg mb-2 pr-8 z-20 relative   ">{template.title}</h3>
+      <h3 className="font-bold text-lg mb-2 pr-8 z-20 relative min-h-16">{template.title}</h3>
 
       {/* Template type */}
       <p className="text-sm mb-2 z-20 relative">Type: {template.type}</p>

@@ -1,19 +1,42 @@
 'use client'
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { BsFillMicFill } from 'react-icons/bs';
-import { BsFillSendFill } from 'react-icons/bs';
+import { BsFillMicFill,BsFillSendFill,BsMicMuteFill } from 'react-icons/bs';
 import { SiCodemagic } from 'react-icons/si';
-
 const AiChatSuggestion = () => {
 
     const [querry,setQuerry] = useState('');
     const [openChat,setOpenChat] = useState(true);
+    const [micOn,setMicOn] = useState(false);
+    const [manuallyOpened, setManuallyOpened] = useState(false);
+    const timeoutRef = useRef(null);
+    const chatRef = useRef(null);
 
-    const timeoutRef = useRef(null)
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (manuallyOpened && chatRef.current && !chatRef.current.contains(event.target)) {
+          setOpenChat(false);
+          setManuallyOpened(false);
+        }
+      };
+
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [manuallyOpened]);
 
     useEffect(()=>{
-      openAIChat()
-    },[querry])
+      if (!manuallyOpened) {
+        openAIChat();
+      }
+    },[querry, manuallyOpened])
+
+    useEffect(()=>{
+      if (!manuallyOpened) {
+        openAIChat();
+      }
+    },[micOn, manuallyOpened])
+
     useEffect(()=>{
       return ()=>{
         if(timeoutRef.current){
@@ -30,11 +53,13 @@ const AiChatSuggestion = () => {
         timeoutRef.current = null
       }
 
-      if(querry === ''){
+      if(querry === '' && !micOn){
         timeoutRef.current = setTimeout(()=>{
-          setOpenChat(false)
-          timeoutRef.current = null
-        },3000)
+          if(!manuallyOpened && !micOn){
+            setOpenChat(false)
+            timeoutRef.current = null
+          }
+        },2000)
       } else {
         if(timeoutRef.current){
           clearTimeout(timeoutRef.current)
@@ -42,19 +67,51 @@ const AiChatSuggestion = () => {
         }
         setOpenChat(true)
       }
-    },[querry])
+    },[querry, micOn, manuallyOpened])
 
   return (
-    <div  className={`fixed z-50 ${openChat ? 'w-5/6 lg:w-2/4 right-8 lg:right-1/4' : 'w-16 h-12 right-4 lg:right-6'} flex gap-2 items-center justify-center  h-16 bg-[#3FB863] rounded-lg bottom-4 px-4 py-2 transition-all duration-300 ease-in-out`}>
+    <div 
+      ref={chatRef}
+      onClick={(e) => {
+        if (!openChat) {
+          setManuallyOpened(true);
+          setOpenChat(true);
+        }
+      }} 
+      className={`fixed z-50 ${openChat ? 'w-5/6 lg:w-2/4  right-8 lg:right-1/4' : 'w-16 h-12 right-4 cursor-pointer hover:bg-[#3FB863]/80 lg:right-6'} flex gap-2 items-center justify-center  h-16 bg-[#3FB863] rounded-lg bottom-4 px-4 py-2 transition-all duration-300 ease-in-out`}
+    >
         {
           openChat ? <>
-              <BsFillMicFill className='w-6 h-6 cursor-pointer text-white' />
-            <input value={querry} onChange={e=>setQuerry(e.target.value)} placeholder="Type / for commands or speak to Ai.." className="w-full h-full bg-white text-sm placeholder:text-gray-400 px-4 py-3 outline-none rounded-full focus:shadow-sm shadow-[#3FB863]/50 focus:inset-shadow-lg inset-shadow-[#3FB863]/50"/>
-            <button className="w-12 h-12 p-3 rounded-full cursor-pointer">
+              {
+                micOn ?
+                <BsMicMuteFill onClick={(e) => {
+                  e.stopPropagation();
+                  setMicOn(false);
+                }} className='w-6 h-6 cursor-pointer text-red-500' />
+                :
+                <BsFillMicFill onClick={(e) => {
+                  e.stopPropagation();
+                  setMicOn(true);
+                }} className='w-6 h-6 cursor-pointer text-white' />
+              }
+            <input 
+              value={querry} 
+              onChange={e=>setQuerry(e.target.value)}
+              onClick={e => e.stopPropagation()}
+              placeholder="Type / for commands or speak to Ai.." 
+              className="w-full h-full bg-white text-sm placeholder:text-gray-400 px-4 py-3 outline-none rounded-full focus:shadow-sm shadow-[#3FB863]/50 focus:inset-shadow-lg inset-shadow-[#3FB863]/50"
+            />
+            <button 
+              onClick={e => e.stopPropagation()} 
+              className="w-12 h-12 p-3 rounded-full"
+            >
                 <BsFillSendFill className="w-full h-full text-white active:translate-x-2 active:-translate-y-2  transition-all duration-300 ease-in-out" />
             </button>
           </> :
-          <SiCodemagic onClick={openAIChat} className="text-2xl text-white"/>
+          <div>
+            <span></span>
+            <SiCodemagic className="text-2xl text-white"/>
+          </div>
         }
     </div>
   )
